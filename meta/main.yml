@@ -1,0 +1,38 @@
+---
+galaxy_info:
+  author: Andrew Rothstein
+  description: non-idempotent package update and upgrade
+  company: BlackRock
+  license:
+    - MIT
+  min_ansible_version: 2.0
+  platforms:
+    - name: Alpine
+      versions:
+        - all
+    - name: Archlinux
+      versions:
+        - all
+    - name: EL
+      versions:
+        - 8
+        - 9
+    - name: Debian
+      versions:
+        - bookworm
+        - bullseye
+    - name: Fedora
+      versions:
+        - 37
+        - 38
+    - name: MacOSX
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+  galaxy_tags:
+    - development
+    - package
+  role_name: pkg_upgrade
