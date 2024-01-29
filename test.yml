@@ -1,9 +1,12 @@
 ---
-- hosts: all
-  vars:
-    pkg_upgrade_update_only: true
-  roles:
-    - role: '{{ playbook_dir }}'
-- hosts: all
-  roles:
-    - role: '{{ playbook_dir }}'
+- name: Testing andrewrothstein.pkg_upgrade
+  hosts: all
+  tasks:
+    - name: Testing (update-only)
+      ansible.builtin.include_role:
+        name: '{{ playbook_dir }}'
+      vars:
+        pkg_upgrade_update_only: true
+    - name: Testing (default)
+      ansible.builtin.include_role:
+        name: '{{ playbook_dir }}'

@@ -1,6 +1,6 @@
 ---
-- name: resolve platform specific vars
-  include_vars: '{{ item }}'
+- name: Resolve platform specific vars
+  ansible.builtin.include_vars: '{{ item }}'
   with_first_found:
     - files:
         - '{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml'
@@ -10,17 +10,19 @@
       paths:
         - '{{ role_path }}/vars'
 
-- name: updating with {{ pkg_upgrade_update_cmd }}
+- name: Updating with {{ pkg_upgrade_update_cmd }}
   become: '{{ pkg_upgrade_privilege_escalation }}'
   become_user: root
-  command: '{{ pkg_upgrade_update_cmd }}'
+  ansible.builtin.command: '{{ pkg_upgrade_update_cmd }}'
   when: pkg_upgrade_update_cmd is defined
+  changed_when: false
 
-- name: upgrading with {{ pkg_upgrade_upgrade_cmd }}
+- name: Upgrading with {{ pkg_upgrade_upgrade_cmd }}
   become: '{{ pkg_upgrade_privilege_escalation }}'
   become_user: root
-  command: '{{ pkg_upgrade_upgrade_cmd }}'
+  ansible.builtin.command: '{{ pkg_upgrade_upgrade_cmd }}'
   when: >-
     (pkg_upgrade_upgrade_cmd is defined)
     and
     (not (pkg_upgrade_update_only | default(False)))
+  changed_when: false
